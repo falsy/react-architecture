@@ -15,17 +15,19 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
   ],
-  plugins: ["@typescript-eslint", "react", "react-hooks", "@emotion"],
+  plugins: [
+    "@typescript-eslint/eslint-plugin",
+    "prettier",
+    "react",
+    "react-hooks"
+  ],
   rules: {
     "@typescript-eslint/no-require-imports": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/no-unknown-property": ["error", { ignore: ["css"] }],
-    "no-undef": "off",
-    "react/no-children-prop": "off",
-    "no-extra-semi": "off"
+    "react/react-in-jsx-scope": "off"
   },
   settings: {
     react: {

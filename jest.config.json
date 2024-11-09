@@ -1,20 +1,24 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": "src",
-  "testRegex": ".*\\.spec\\.ts$",
+  "testMatch": ["**/?(*.)+(spec|test).[tj]s?(x)"],
+  "moduleFileExtensions": ["js", "json", "ts", "tsx"],
+  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
+  "testEnvironment": "jsdom",
+  "rootDir": ".",
   "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.(ts|tsx|js|jsx)?$": "ts-jest",
+    "\\.css$": "jest-transform-stub"
   },
-  "collectCoverageFrom": ["**/*.(t|j)s"],
-  "coverageDirectory": "../coverage",
-  "testEnvironment": "node",
   "moduleNameMapper": {
-    "^constants/(.*)$": "<rootDir>/constants/$1",
-    "^adapters/(.*)$": "<rootDir>/adapters/$1",
-    "^utils/(.*)$": "<rootDir>/utils/$1",
-    "^hooks/(.*)$": "<rootDir>/hooks/$1",
-    "^di/(.*)$": "<rootDir>/di/$1",
-    "^components/(.*)$": "<rootDir>/components/$1",
-    "^pages/(.*)$": "<rootDir>/pages/$1"
+    "^constants/(.*)$": "<rootDir>/src/constants/$1",
+    "^domains/(.*)$": "<rootDir>/src/domains/$1",
+    "^adapters/(.*)$": "<rootDir>/src/adapters/$1",
+    "^hooks/(.*)$": "<rootDir>/src/hooks/$1",
+    "^di/(.*)$": "<rootDir>/src/di/$1",
+    "^pages/(.*)$": "<rootDir>/src/pages/$1",
+    "^providers/(.*)$": "<rootDir>/src/providers/$1",
+    "^containers/(.*)$": "<rootDir>/src/containers/$1",
+    "^components/(.*)$": "<rootDir>/src/components/$1",
+    "^styled-system/(.*)$": "<rootDir>/styled-system/$1"
   }
 }

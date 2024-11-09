@@ -15,16 +15,18 @@
     "module": "ES2022",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "constants/*": ["constants/*"],
-      "adapters/*": ["adapters/*"],
-      "utils/*": ["utils/*"],
-      "hooks/*": ["hooks/*"],
-      "di/*": ["di/*"],
-      "components/*": ["components/*"],
-      "pages/*": ["pages/*"]
+      "constants/*": ["src/constants/*"],
+      "domains/*": ["src/domains/*"],
+      "adapters/*": ["src/adapters/*"],
+      "di/*": ["src/di/*"],
+      "hooks/*": ["src/hooks/*"],
+      "providers/*": ["src/providers/*"],
+      "containers/*": ["src/containers/*"],
+      "components/*": ["src/components/*"],
+      "pages/*": ["src/pages/*"],
+      "styled-system/*": ["styled-system/*"]
     }
   },
   "include": ["src"]

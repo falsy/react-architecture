@@ -1,15 +1,16 @@
 import "styled-system/styles.css"
-import { css } from "styled-system/css"
+import QueryClientProvider from "providers/QueryClientProvider"
+import DependencyProvider from "providers/DependencyProvider"
+import { Routes } from "./Routes"
 
 export default function App() {
   return (
-    <div
-      className={css({
-        background: "black",
-        color: "white"
-      })}
-    >
-      <h1>Hello World</h1>
+    <div>
+      <QueryClientProvider>
+        <DependencyProvider>
+          <Routes />
+        </DependencyProvider>
+      </QueryClientProvider>
     </div>
   )
 }

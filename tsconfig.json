@@ -22,10 +22,10 @@
       "adapters/*": ["src/adapters/*"],
       "di/*": ["src/di/*"],
       "hooks/*": ["src/hooks/*"],
+      "pages/*": ["src/pages/*"],
       "providers/*": ["src/providers/*"],
       "containers/*": ["src/containers/*"],
       "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"],
       "styled-system/*": ["styled-system/*"]
     }
   },

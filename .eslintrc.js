@@ -27,7 +27,9 @@ module.exports = {
   ],
   rules: {
     "@typescript-eslint/no-require-imports": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-undef": "off",
+    "react-hooks/exhaustive-deps": "off"
   },
   settings: {
     react: {

@@ -6,6 +6,10 @@ To avoid redundancy with a previous project, [clean-architecture-with-typescript
 
 In this project, Webpack’s `devServer` is used to implement very simple functionality for displaying, adding, and deleting posts. This allows for a lightweight overview of the project structure and has been developed with the idea of serving as boilerplate code for new projects.
 
+#### Note.
+
+> \+ My English is not perfect, so please bear with me.
+
 ## Languages
 
 - [English](https://github.com/falsy/react-width-clean-architecture)

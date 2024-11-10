@@ -1,233 +1,92 @@
-## ⚠️ Discontinued
-
-> Development of this project has been discontinued due to significant overlap with the "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" project.
-
 # React with Clean Architecture
 
-This project is a small idea project for a React architecture based on the principles of `Domain-Driven Design (DDD)` and `Clean Architecture`. The goal of this project is to effectively manage the complexity of the business domain and build a modular, domain-centric design to facilitate easier service expansion and maintenance.
+This is a small idea project based on the principles of `Domain-Driven Design(DDD)` and `Clean Architecture` for a React architecture. To maintain the core principle of `framework independence` in Clean Architecture, the primary domain logic and business rules are written independently of any framework, with only the UI layer being designed to rely on React.
 
-While the project uses the `React` framework, it is designed to minimize framework dependency and maintain the core Clean Architecture principle of `framework independence.` The main domain logic and business rules are written independently of any framework, with React being utilized only in the UI layer.
+To avoid redundancy with a previous project, [clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript), the focus is on a commonly used React tech stack rather than an discussion of DDD or Clean Architecture.
 
-#### Note.
-
-> This project is a part of my learning journey in Object-Oriented Programming (OOP), Domain-Driven Design (DDD), Clean Architecture, and related topics. While I continue to update it, there may still be areas where my understanding is lacking or where I may have made mistakes. If you find any issues or have suggestions for improvement, please feel free to submit an issue or a pull request. ☺️
-
-> \+ My English is not perfect, so please bear with me.
+In this project, Webpack’s `devServer` is used to implement very simple functionality for displaying, adding, and deleting posts. This allows for a lightweight overview of the project structure and has been developed with the idea of serving as boilerplate code for new projects.
 
 ## Languages
 
-- [English](https://github.com/falsy/domain-driven-react-architecture)
-- [한글](https://github.com/falsy/domain-driven-react-architecture/blob/main/README-ko.md)
-
-## Ubiquitous Language
-
-![Ubiquitous Language](/_images/ubiquitous.png#gh-light-mode-only)
-![Ubiquitous Language](/_images/ubiquitous-dark.png#gh-dark-mode-only)
-
-Ubiquitous Language refers to a shared language used by all team members to maintain consistency in communication throughout a project.
-This language should be shared among all project members, including the project leader, domain experts, developers, UI/UX designers, business analysts, QA engineers, and others. Moreover, this language is not only used in documentation or conversations during collaboration but is also reflected in the software models and code.
-
-For example, the term `Transaction` might be interpreted differently by various team members. For the project leader, it could represent an important step or event in the business flow; for developers, it might mean a unit of work in a database; and for domain experts, it could refer to activities related to transactions or payments.
-However, in this sample project, `Transaction` is defined as a unit that constitutes user consumption data, making it a part of the Ubiquitous Language shared by all team members.
-
-## Domains
-
-![Domains](/_images/domains-v2.png#gh-light-mode-only)
-![Domains](/_images/domains-v2-dark.png#gh-dark-mode-only)
-
-Let’s assume we’re dealing with a financial services domain. Within this broad domain of finance, there are many subdomains such as banking, payment services, lending services, asset management, and fintech. Further breaking down the fintech domain, we can have smaller domains like digital payments, digital banking, crowdfunding, and personal asset management.
-
-In this sample project, we will look at a very simple example application in `the Personal Asset Management` domain.
-
-## Clean Architecture
-
-![Alt Clean architecture](/_images/clean-architecture.png#gh-light-mode-only)
-![Alt Clean architecture](/_images/clean-architecture-dark.png#gh-dark-mode-only)
-
-As with many architectures, the primary goal of Clean Architecture is to separate concerns. It divides layers according to each concern, designs around the domain rather than detailed implementations, and ensures the inner layers do not depend on external elements like frameworks, databases, or UIs.
-
-- Separate the detailed implementation area and the domain area.
-- The architecture does not depend on the framework.
-- The outer layers can depend on the inner layers, but the inner layers cannot depend on the outer layers.
-- Both high-level and low-level modules depend on abstractions.
-
-## Communitaction Flow
-
-![Communitaction Flow](/_images/flow.png#gh-light-mode-only)
-![Communitaction Flow](/_images/flow-dark.png#gh-dark-mode-only)
-
-The flow of Clean Architecture can be briefly illustrated in the diagram above.
-
-## Entities
-
-An `Entity` is one of the core concepts of domain modeling, representing an object that maintains identity through a unique identifier while having state and behavior. An `Entity` is not just a data holder but also plays a role in directly controlling and managing its data, expressing important business rules and logic within the domain.
-
-## Aggregates
-
-![Aggregate](/_images/aggregate.png#gh-light-mode-only)
-![Aggregate](/_images/aggregate-dark.png#gh-dark-mode-only)
-
-An `Aggregate` is an object that serves as a consistency boundary and can include multiple entities or value objects. It encapsulates its internal state, ensuring that any external access is controlled and can only be modified through the `Aggregate Root`. This consistency boundary helps manage the complexity of relationships within the model, especially as the service scales and transactions become more complex.
-
-## Use Cases
-
-A `Use Case` defines the interactions between the user and the service and clarifies the business functions the service must provide using domain objects (`Entity`, `Aggregate`, `Value Object`). From a system architecture perspective, a `Use Case` separates application logic from business rules, allowing the application to use the business rules and logic contained in the domain objects without directly controlling the business logic.
-
-# Sample Project
-
-Through a very simple sample project that shows the user’s cards, accounts, and consumption data, and allows for adding consumption data, we will examine the data flow and how each layer of the architecture interacts.
+- [English](https://github.com/falsy/react-width-clean-architecture)
+- [한글](https://github.com/falsy/react-width-clean-architecture/blob/main/README-ko.md)
 
 ## Use Stack
 
-TypeScript, Webpack, React, TanStack Query, Emotion, Class-Validator, Axios
+TypeScript, Webpack, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, React Testing Library
 
 ## Directory Structure
 
-> For simplicity, the interface directory is omitted.
-
 ```
 /src
+├─ domains
+│  ├─ aggregates
+│  ├─ entities
+│  ├─ useCases
+│  ├─ repositories
+│  │  └─ interfaces
+│  ├─ dtos
+│  │  └─ interfaces
+│  └─ vos
 ├─ adapters
-│  ├─ domains
-│  │  ├─ aggregates
-│  │  │  └─ entities
-│  │  ├─ entities
-│  │  ├─ useCases
-│  │  └─ vos
 │  ├─ presenters
 │  ├─ repositories
 │  ├─ infrastructures
 │  ├─ dtos
 │  └─ vms
-├─ components
-│  ├─ commons
-│  ├─ networks
-│  └─ ...
 ├─ constants
-│  ├─ networks
-│  ├─ queries
-│  └─ ...
 ├─ di
 ├─ hooks
-└─ pages
-   └─ ...
+├─ pages
+├─ providers
+├─ containers
+└─ components
 ```
 
-Directories are clearly separated by system layers. Within the domain directory, `Entities` and `Aggregates` are separated, and `Entities` used only within an `Aggregate` are placed inside the `Aggregate` to clearly indicate restricted external access. In the sample project, common components of the UI layer are placed in the commons folder, components related to react-query are in the networks folder, and other components are placed in domain-specific directories.
+The basic directory structure is organized simply and clearly, mirroring the layers of Clean Architecture. The UI layer’s components are divided into `pages` based on `Routes`, as well as `providers`, `containers`, and `components`. As the names suggest, `providers` contains Provider components that use `Context`, `containers` are components that manage internal state, and `components` are for purely presentational components that render UI based on Props.
 
-## Entities
+Within each directory, if the components become numerous or complex, directories are further subdivided by domain. Components shared across various domains are organized under a `commons` directory.
 
-The sample project defines five entities: `User`, `Transaction`, `Franchise`, `Card`, and `Account`. All of these have unique identifiers and state values. However, this sample project is very simple and only displays data to the user, so it does not include business logic for modifying state or interacting with other entities.
+For example, in the sample project’s `components` directory, components are separated into a `commons` directory and a `post` directory for better organization.
 
-## Aggregates
+## Dependency Injection
 
-To reduce the complexity of `entities` and `value objects` used in the service, two aggregates, `CardTransaction` and `AccountTransaction`, are defined with the `Transaction` entity as the Aggregate Root.
-A simple interface for `CardTransaction` looks like this:
+DI was constructed using React's `Context`, `Provider`, and `Hook`.
 
-### CardTransaction
+### DI
 
 ```ts
-interface ITransaction {
-  readonly id: string
-  readonly amount: number
-  readonly keyword: string
-  readonly franchiseId?: string
-  readonly cardId?: string
-  readonly accountId?: string
-  readonly createdAt: string
-}
+...
 
-interface ICardTransaction extends ITransaction {
-  readonly franchise?: IFranchise
-  readonly card: ICard
+export default function di() {
+  const clientHTTP = new ClientHTTP(API_URL)
+  const repositories = repositoriesFn({ clientHTTP })
+  const useCases = useCasesFn(repositories)
+  const presenters = presentersFn(useCases)
+
+  return presenters
 }
 ```
 
-As an extension of the `Transaction` entity, we define `CardTransaction`, which includes both the `Franchise` and `Card` entities.
-
-Currently, `Franchise` is not used anywhere else in the service outside of `CardTransaction`, and while `Card` can be used independently as a list outside of `CardTransaction`, it is not displayed simultaneously on the client’s screen and does not require separate state management logic. Therefore, we define `Card` and `Franchise` within `CardTransaction` (as the Aggregate Root), ensuring that `Franchise` and `Card` can only be accessed through `CardTransaction` when it is in use, thereby reducing the complexity of relationships between models within the service.
-
-## Infrastructures
-
-The `Infrastructure` layer manages connections with the outside of the application, such as communication with external servers using HTTP or browser Web APIs like LocalStorage.
-In the sample project, the ClientHTTP class is defined to handle HTTP communication with external servers using the axios library.
-
-## Repositories
-
-In backend services, the `Repository` layer typically performs `CRUD` operations related to databases, handling basic data manipulation like storing, querying, updating, and deleting data. It abstracts the interaction with the database so that the business logic does not need to be aware of the data storage details.
-
-Similarly, in the sample project, the `Repository` layer handles `POST`, `GET`, `PUT`, and `DELETE` operations related to HTTP communication with the server, abstracting these interactions so the business logic does not need to know the data's origin. Furthermore, data received from the external server is encapsulated as `DTO` and validated to ensure stability when used within the client.
-
-When an API server is used by multiple clients, the clients may receive properties that are not immediately needed. However, in the `Repository`, all data—including those not currently in use—is declared and encapsulated to ensure the integrity and extensibility of API communication.
-
-## Use Cases
-
-The sample project includes very simple business logic:
-
-- Users can view their consumption history.
-  1.  Retrieve a list of franchises, cards, and accounts.
-  2.  Include account information for account transactions.
-  3.  Include card information for card transactions.
-  4.  Include franchise information for card transactions.
-  5.  Display the transactions to the user.
-- Users can view their list of owned cards.
-- Users can view their list of owned accounts.
-- Users can add new consumption data.
-
-The `Use Cases` layer uses domain objects (`Entity`, `Aggregate`, `Value Object`) to encapsulate the required `DTO` values back into `Entities` and `Aggregates` to execute the business logic.
-
-And since all properties were encapsulated in a `DTO` within the `Repository`, any unused properties are removed at this stage when they are encapsulated as an `Entity` in the `Use Case`.
-
-### Inversion of Control
-
-![Alt Inversion Of Control](/_images/inversion-of-control.png#gh-light-mode-only)
-![Alt Inversion Of Control](/_images/inversion-of-control-dark.png#gh-dark-mode-only)
-
-Since the `Use Cases` layer is a higher layer than the `Repository` layer and should not depend on it, it relies on abstract interfaces of the `Repository` and operates through DI(Dependency Injection).
-
-## Presenters
-
-The `Presenter` layer is ultimately DI-injected(Dependency Injection) to interact with the UI and configure the service. `Presenters` provide specific methods used in the UI layer and encapsulate data into a VM (View Model) optimized for UI use.
-
-In the sample project, to display the `recent summary of card transactions` in the UI, the `getRecentCardTransactionSummary` method of the Presenter is called. This method calls the `getTransaction` method of the Use Case with parameters for a specific period and type(card or account). In this process, the `UI` does not need to know the internal logic of the `Use Case`, nor the details about the period or type of data.
-
-Additionally, by encapsulating the `CardTransaction` Aggregate received as a response into a VM suitable for the UI, the complexity of the data is reduced, and the dependency between the UI and the Presenter is minimized. Below is a VM class that encapsulates the Aggregate:
+### Provider
 
 ```ts
-interface ICardTxnSummaryVM {
-  readonly id: string
-  readonly amount: number
-  readonly keyword: string
-  readonly card: ICardInfoVO
-  readonly longTime: number
-  readonly dayOfWeek: string
-  readonly day: string
+import { createContext, ReactNode } from "react"
+import di from "di/index"
+
+interface Dependencies {
+  presenters: ReturnType<typeof di>
 }
-```
 
-By minimizing dependency between the UI and the Presenter, we mean that if the UI wants to change how the date is displayed, from `5(Tue)` to `09/05`, for example, it can do so by modifying only how the `createdAt` value of CardTransaction is used in the VM’s constructor, without requiring any changes to the Presenter. This allows for flexible formatting adjustments directly in the UI by redefining date properties, such as switching from `dayOfWeek` and `day` to `year` and `month` in the VM.
-
-## UI
-
-The `UI` layer ultimately configures the service by its relationship with the DI-injected Presenter.
-
-`DI(Dependency Injection)` is implemented using the Context API, Provider, and Hooks.
-
-```tsx
-export const DependencyContext = createContext<IDependencies | null>(null)
+export const DependencyContext = createContext<Dependencies | null>(null)
 
 export default function DependencyProvider({
   children
 }: {
   children: ReactNode
 }) {
-  const infrastructures = infrastructuresFn()
-  const repositories = repositoriesFn(infrastructures.clientHTTP)
-  const useCases = useCasesFn(repositories)
-  const presenters = presentersFn(useCases)
-
   const dependencies = {
-    presenters
+    presenters: di()
   }
 
   return (
@@ -238,9 +97,11 @@ export default function DependencyProvider({
 }
 ```
 
-```tsx
+### Hook
+
+```ts
 import { useContext } from "react"
-import { DependencyContext } from "di/DependencyContext"
+import { DependencyContext } from "providers/DependencyProvider"
 
 export default function useDependencies() {
   const dependencies = useContext(DependencyContext)
@@ -251,47 +112,50 @@ export default function useDependencies() {
 }
 ```
 
-In the sample project, the components of the UI are designed to lower dependency on `TanStack Query` and configure the service more component-centrically by using `TanStack Query` and Higher-Order Components(HOC).
+## Networks
 
-For example, the component structure that displays the list of cards in the sample project is as follows:
+Using `TanStack Query` and Higher-Order Component(HOC), we have reduced dependence on UI components and TanStack Query and made it possible for components to effectively implement functions in a simple configuration.
 
-```tsx
-// CardSection.tsx
+```ts
 ...
-export default function CardSection() {
+
+export default function PostSection() {
+  const { presenters } = useDependencies()
+
   return (
-    <div>
-      <ErrorContainer>
-        <QueryContainer
-          queryKey={GET_CARDS}
-          queryFn={() => di.card.getCards()}
-          loadingComponent={<Loader />}
-          errorComponent={
-            <RefetchContainer queryKey={GET_CARDS}>
-              <Error />
-            </RefetchContainer>
-          }
-        >
-          <ResCardList />
-        </QueryContainer>
-      </ErrorContainer>
-    </div>
+    <>
+      <section>
+        <Title text="Posts" />
+        <ErrorContainer>
+          <QueryContainer
+            queryKey={GET_ALL_POSTS}
+            queryFn={() => presenters.post.getSummaryPosts()}
+            loadingComponent={<div>Loading...</div>}
+            errorComponent={<div>Error...</div>}
+          >
+            <PostList />
+          </QueryContainer>
+        </ErrorContainer>
+      </section>
+      <Divide />
+      <CreatePostSection />
+    </>
   )
 }
 ```
 
-```tsx
-// ResCardList.tsx
+```ts
 ...
-export default function ResCardList({ response }: { response?: Array<ICard> }) {
-  const cards = response || []
+
+export default function PostList({ response }: { response?: Array<IPost> }) {
+  const posts = response || []
 
   return (
     <div>
       <ul>
-        {cards.map((card) => (
-          <li key={card.id}>
-            <CardItem card={card} />
+        {posts.map((post) => (
+          <li>
+            <PostItem post={post} />
           </li>
         ))}
       </ul>
@@ -299,12 +163,6 @@ export default function ResCardList({ response }: { response?: Array<ICard> }) {
   )
 }
 ```
-
-To explicitly distinguish between components that receive data using `useQuery` and those that modify data using `useMutation` in the HOC structure, components receiving data are prefixed with `Res-`, while those modifying data are prefixed with `Act-`.
-
-## Screenshot
-
-![Screenshot](/_images/screenshot-v2.png)
 
 ## Run Project
 

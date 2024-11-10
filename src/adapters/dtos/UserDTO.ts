@@ -1,27 +1,17 @@
-import { IsEmail, IsString } from "class-validator"
-import IUserDTO, { IUserDTOParams } from "./interfaces/IUserDTO"
+import IUserDTO from "domains/dtos/interfaces/IUserDTO"
 
 export default class UserDTO implements IUserDTO {
-  @IsString()
   readonly id: string
-
-  @IsString()
   readonly name: string
-
-  @IsEmail()
   readonly email: string
+  readonly createdAt: Date
+  readonly updatedAt: Date
 
-  @IsString()
-  readonly phone: string
-
-  @IsString()
-  readonly address: string
-
-  constructor(params: IUserDTOParams) {
+  constructor(params: IUserDTO) {
     this.id = params.id
     this.name = params.name
     this.email = params.email
-    this.phone = params.phone
-    this.address = params.address
+    this.createdAt = params.createdAt
+    this.updatedAt = params.updatedAt
   }
 }

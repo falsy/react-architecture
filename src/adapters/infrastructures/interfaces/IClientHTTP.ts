@@ -1,16 +1,21 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios"
 
 export default interface IClientHTTP {
-  get(url: string, options?: AxiosRequestConfig): Promise<AxiosResponse>
+  get<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>
   post<T>(
     url: string,
-    body: T,
-    options?: AxiosRequestConfig
-  ): Promise<AxiosResponse>
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>>
   put<T>(
     url: string,
-    body: T,
-    options?: AxiosRequestConfig
-  ): Promise<AxiosResponse>
-  delete(url: string, options?: AxiosRequestConfig): Promise<AxiosResponse>
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>>
+  patch<T>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>>
+  delete<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>
 }

@@ -1,33 +1,18 @@
-import { validateOrReject } from "class-validator"
-import { API_URI } from "constants/networks"
+import IUserDTO from "domains/dtos/interfaces/IUserDTO"
+import IUserRepository from "domains/repositories/interfaces/IUserRepository"
 import IClientHTTP from "adapters/infrastructures/interfaces/IClientHTTP"
-import IUserRepository from "./interfaces/IUserRepository"
-import IUserDTO from "adapters/dtos/interfaces/IUserDTO"
 import UserDTO from "adapters/dtos/UserDTO"
 
-class UserRepository implements IUserRepository {
-  constructor(private clientHttp: IClientHTTP) {}
+export default class UserRepository implements IUserRepository {
+  private client: IClientHTTP
+
+  constructor(client: IClientHTTP) {
+    this.client = client
+  }
 
   async getUser(): Promise<IUserDTO> {
-    try {
-      const res = await this.clientHttp.get(`${API_URI}/api/user`)
+    const { data } = await this.client.get<IUserDTO>("/api/users")
 
-      if (res.status !== 200) {
-        throw new Error("Error occurred while fetching data")
-      }
-
-      const userDTO = new UserDTO(res.data)
-      await validateOrReject(userDTO)
-
-      return userDTO
-    } catch (error) {
-      if (error instanceof Error) {
-        throw error
-      } else {
-        throw new Error("Unknown error type")
-      }
-    }
+    return new UserDTO(data)
   }
 }
-
-export default UserRepository

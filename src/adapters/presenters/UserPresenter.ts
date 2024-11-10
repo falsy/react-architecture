@@ -1,11 +1,14 @@
+import IUserUseCase from "domains/useCases/interfaces/IUserUseCase"
 import IUserPresenter from "./interfaces/IUserPresenter"
-import IUserUseCase from "adapters/domains/useCases/interfaces/IUserUseCase"
-import IUser from "adapters/domains/entities/interfaces/IUser"
 
 export default class UserPresenter implements IUserPresenter {
-  constructor(private userUseCase: IUserUseCase) {}
+  private userUseCase: IUserUseCase
 
-  getUser(): Promise<IUser> {
+  constructor(userUseCase: IUserUseCase) {
+    this.userUseCase = userUseCase
+  }
+
+  getUser() {
     return this.userUseCase.getUser()
   }
 }

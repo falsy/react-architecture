@@ -4,7 +4,7 @@ This is a small idea project based on the principles of `Domain-Driven Design(DD
 
 To avoid redundancy with a previous project, [clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript), the focus is on a commonly used React tech stack rather than an discussion of DDD or Clean Architecture.
 
-In this project, Webpack’s `devServer` is used to implement very simple functionality for displaying, adding, and deleting posts. This allows for a lightweight overview of the project structure and has been developed with the idea of serving as boilerplate code for new projects.
+This project utilizes Vite's `mock-server` to implement a very simple functionality for displaying, adding, or deleting a list of posts. It serves as a lightweight way to review the overall project structure and functionality while also being designed as a boilerplate codebase for new projects.
 
 #### Note.
 
@@ -23,6 +23,8 @@ TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL
 
 ```
 /src
+├─ constants
+├─ di
 ├─ domains
 │  ├─ aggregates
 │  ├─ entities
@@ -38,20 +40,24 @@ TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL
 │  ├─ infrastructures
 │  ├─ dtos
 │  └─ vms
-├─ constants
-├─ di
-├─ hooks
-├─ pages
-├─ providers
-├─ containers
-└─ components
+└─ frameworks
+   ├─ hooks
+   ├─ pages
+   ├─ providers
+   ├─ containers
+   └─ components
 ```
 
-The basic directory structure is organized simply and clearly, mirroring the layers of Clean Architecture. The UI layer’s components are divided into `pages` based on `Routes`, as well as `providers`, `containers`, and `components`. As the names suggest, `providers` contains Provider components that use `Context`, `containers` are components that manage internal state, and `components` are for purely presentational components that render UI based on Props.
+The directory structure of the project is designed to be simple and clear, following the layers of Clean Architecture. The structure is divided into three main parts: `domains`, `adapters`, and `frameworks`, representing higher levels of abstraction in that order. The `frameworks` layer is further categorized into `pages`, `providers`, `containers`, and `components`.
 
-Within each directory, if the components become numerous or complex, directories are further subdivided by domain. Components shared across various domains are organized under a `commons` directory.
+- `providers`: Contains components focused on providing specific data, such as `Context`.
+- `containers`: Contains components that maintain and use internal state.
+- `components`: Includes components that focus on rendering views using props.
 
-For example, in the sample project’s `components` directory, components are separated into a `commons` directory and a `post` directory for better organization.
+When the number of components within a directory grows and becomes complex, they are further organized into domain-specific directories. Components that are shared across multiple domains are placed in a `commons` directory. In the sample project, components are organized within the `components` directory, which contains a `commons` directory and domain-specific directories such as `post`.
+
+> In the sample project, which is small and simple, the directory structure is divided into a first level with `pages`, `providers`, `containers`, and `components`, and a second level under these, with `commons` and domain-specific directories (e.g., `post`, `comment`, etc.). However, in larger, more general projects, components can be further subdivided within the second level into a third level, such as `sections`, `boxes`, `items`, for even more granular organization.  
+> This `frameworks` layer directory structure is just a simple example. The structure of the frameworks directory in a general project can be freely adjusted depending on the project’s requirements or the preferences of the development team.
 
 ## Dependency Injection
 
@@ -118,6 +124,8 @@ export default function useDependencies() {
 
 ## Networks
 
+> The component structure for network communication is not closely related to the Clean Architecture. It is merely a small idea for organizing a component-centric project.
+
 Using `TanStack Query` and Higher-Order Component(HOC), we have reduced dependence on UI components and TanStack Query and made it possible for components to effectively implement functions in a simple configuration.
 
 ```ts
@@ -130,16 +138,16 @@ export default function PostSection() {
     <>
       <section>
         <Title text="Posts" />
-        <ErrorContainer>
-          <QueryContainer
+        <ErrorBoundary>
+          <QueryProvider
             queryKey={GET_ALL_POSTS}
             queryFn={() => presenters.post.getSummaryPosts()}
             loadingComponent={<div>Loading...</div>}
             errorComponent={<div>Error...</div>}
           >
             <PostList />
-          </QueryContainer>
-        </ErrorContainer>
+          </QueryProvider>
+        </ErrorBoundary>
       </section>
       <Divide />
       <CreatePostSection />
@@ -151,7 +159,7 @@ export default function PostSection() {
 ```ts
 ...
 
-export default function PostList({ response }: { response?: Array<IPost> }) {
+export default function PostList({ response }: { response?: IPost[] }) {
   const posts = response || []
 
   return (
@@ -176,7 +184,7 @@ export default function PostList({ response }: { response?: Array<IPost> }) {
 yarn
 ```
 
-### Panda CSS Install
+### Install Panda CSS
 
 ```
 yarn panda

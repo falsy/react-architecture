@@ -1,7 +1,7 @@
 import { cloneElement } from "react"
 import { useQuery } from "@tanstack/react-query"
 
-export default function QueryContainer<TData, TVariables>({
+export default function QueryProvider<TData, TVariables>({
   children,
   queryKey,
   queryFn,

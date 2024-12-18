@@ -2,8 +2,8 @@ import { useState } from "react"
 import { css } from "styled-system/css"
 import { GET_ALL_POSTS } from "constants/queries"
 import useDependencies from "hooks/useDependencies"
-import ErrorContainer from "containers/ErrorContainer"
-import MutationContainer from "containers/MutationContainer"
+import ErrorBoundary from "components/commons/ErrorBoundary"
+import MutationProvider from "providers/MutationProvider"
 import Button from "components/commons/Button"
 import Input from "components/commons/Input"
 import Title from "components/commons/Title"
@@ -34,8 +34,8 @@ export default function CreatePostSection() {
           margin: "10px 0"
         })}
       >
-        <ErrorContainer>
-          <MutationContainer
+        <ErrorBoundary>
+          <MutationProvider
             mutationFn={() => {
               return presenters.post.createPost({ title, content })
             }}
@@ -43,8 +43,8 @@ export default function CreatePostSection() {
             invalidateQueryKeys={[[GET_ALL_POSTS]]}
           >
             <Button text="Create" />
-          </MutationContainer>
-        </ErrorContainer>
+          </MutationProvider>
+        </ErrorBoundary>
       </div>
     </section>
   )

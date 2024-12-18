@@ -1,6 +1,6 @@
-import { ErrorBoundary } from "react-error-boundary"
+import { ErrorBoundary as EB } from "react-error-boundary"
 
-export default function ErrorContainer({
+export default function ErrorBoundary({
   children,
   fallback
 }: {
@@ -8,12 +8,12 @@ export default function ErrorContainer({
   fallback?: JSX.Element
 }) {
   return (
-    <ErrorBoundary
+    <EB
       FallbackComponent={
         fallback ? () => fallback : () => <div>Something went wrong</div>
       }
     >
       {children}
-    </ErrorBoundary>
+    </EB>
   )
 }

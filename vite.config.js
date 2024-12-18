@@ -12,11 +12,11 @@ export default defineConfig({
       domains: path.resolve(__dirname, "./src/domains/"),
       adapters: path.resolve(__dirname, "./src/adapters/"),
       di: path.resolve(__dirname, "./src/di/"),
-      hooks: path.resolve(__dirname, "./src/hooks/"),
-      pages: path.resolve(__dirname, "./src/pages/"),
-      providers: path.resolve(__dirname, "./src/providers/"),
-      containers: path.resolve(__dirname, "./src/containers/"),
-      components: path.resolve(__dirname, "./src/components/"),
+      hooks: path.resolve(__dirname, "./src/frameworks/hooks/"),
+      pages: path.resolve(__dirname, "./src/frameworks/pages/"),
+      providers: path.resolve(__dirname, "./src/frameworks/providers/"),
+      containers: path.resolve(__dirname, "./src/frameworks/containers/"),
+      components: path.resolve(__dirname, "./src/frameworks/components/"),
       "styled-system": path.resolve(__dirname, "./styled-system/")
     },
     extensions: [".ts", ".tsx", ".js", ".mjs"]

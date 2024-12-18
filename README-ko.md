@@ -13,7 +13,7 @@
 
 ## Use Stack
 
-TypeScript, Webpack, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, React Testing Library
+TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL
 
 ## Directory Structure
 
@@ -170,6 +170,12 @@ export default function PostList({ response }: { response?: Array<IPost> }) {
 
 ```
 yarn
+```
+
+### Panda CSS 설치
+
+```
+yarn panda
 ```
 
 ### 실행

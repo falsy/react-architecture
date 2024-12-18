@@ -17,7 +17,7 @@ In this project, Webpack’s `devServer` is used to implement very simple functi
 
 ## Use Stack
 
-TypeScript, Webpack, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, React Testing Library
+TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL
 
 ## Directory Structure
 
@@ -174,6 +174,12 @@ export default function PostList({ response }: { response?: Array<IPost> }) {
 
 ```
 yarn
+```
+
+### Panda CSS Install
+
+```
+yarn panda
 ```
 
 ### Run

@@ -1,7 +1,7 @@
 import { GET_ALL_POSTS } from "constants/queries"
 import useDependencies from "hooks/useDependencies"
-import ErrorContainer from "containers/ErrorContainer"
-import MutationContainer from "containers/MutationContainer"
+import MutationProvider from "providers/MutationProvider"
+import ErrorBoundary from "components/commons/ErrorBoundary"
 import Button from "components/commons/Button"
 import { css } from "styled-system/css"
 
@@ -14,8 +14,8 @@ export default function DeletePostBox({ postId }: { postId: string }) {
         margin: "10px 0"
       })}
     >
-      <ErrorContainer>
-        <MutationContainer
+      <ErrorBoundary>
+        <MutationProvider
           mutationFn={() => {
             return presenters.post.deletePost(postId)
           }}
@@ -23,8 +23,8 @@ export default function DeletePostBox({ postId }: { postId: string }) {
           loadingComponent={<div>Loading...</div>}
         >
           <Button text="Delete" />
-        </MutationContainer>
-      </ErrorContainer>
+        </MutationProvider>
+      </ErrorBoundary>
     </div>
   )
 }

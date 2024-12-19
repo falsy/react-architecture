@@ -2,7 +2,7 @@ import { css } from "styled-system/css"
 import IPost from "domains/aggregates/interfaces/IPost"
 import PostItem from "./PostItem"
 
-export default function PostList({ response }: { response?: Array<IPost> }) {
+export default function PostList({ response }: { response?: IPost[] }) {
   const posts = response || []
 
   return (
@@ -11,7 +11,7 @@ export default function PostList({ response }: { response?: Array<IPost> }) {
         background: "#f5f5f5"
       })}
     >
-      <ul>
+      <ul id="post-list">
         {posts.map((post) => (
           <li
             key={post.id}

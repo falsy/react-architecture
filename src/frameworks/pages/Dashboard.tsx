@@ -1,4 +1,4 @@
-import Header from "components/Header"
+import Header from "components/commons/Header"
 import PostSection from "containers/post/PostSection"
 import { css } from "styled-system/css"
 

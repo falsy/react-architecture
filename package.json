@@ -1,14 +1,15 @@
 {
   "name": "react-with-clean-architecture",
-  "version": "2.2.0",
+  "version": "2.3.0",
+  "private": true,
   "description": "A Sample Project for a React Project Based on Clean Architecture",
-  "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development",
-    "panda": "panda --watch",
-    "prepare": "panda codegen",
+    "start": "vite",
+    "build": "vite build",
+    "panda": "panda",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest",
+    "cypress": "cypress open"
   },
   "author": "falsy",
   "license": "The Unlicense",
@@ -31,26 +32,20 @@
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
-    "css-loader": "^7.1.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "cypress": "^13.17.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "html-webpack-plugin": "^5.6.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-transform-stub": "^2.0.0",
-    "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^10.0.9",
     "prettier": "^3.3.3",
-    "style-loader": "^4.0.0",
-    "ts-jest": "^29.2.4",
-    "ts-loader": "^9.5.1",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.1.0",
-    "webpack": "^5.93.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "vite": "^6.0.3"
   }
 }

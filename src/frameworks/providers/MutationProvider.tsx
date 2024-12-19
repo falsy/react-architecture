@@ -1,7 +1,7 @@
 import { cloneElement } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-export default function MutationContainer<TData, TVariables>({
+export default function MutationProvider<TData, TVariables>({
   children,
   mutationFn,
   loadingComponent = <></>,

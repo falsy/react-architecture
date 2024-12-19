@@ -17,17 +17,17 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
+      "styled-system/*": ["styled-system/*"],
       "constants/*": ["src/constants/*"],
       "domains/*": ["src/domains/*"],
       "adapters/*": ["src/adapters/*"],
       "di/*": ["src/di/*"],
-      "hooks/*": ["src/hooks/*"],
-      "pages/*": ["src/pages/*"],
-      "providers/*": ["src/providers/*"],
-      "containers/*": ["src/containers/*"],
-      "components/*": ["src/components/*"],
-      "styled-system/*": ["styled-system/*"]
+      "hooks/*": ["src/frameworks/hooks/*"],
+      "pages/*": ["src/frameworks/pages/*"],
+      "providers/*": ["src/frameworks/providers/*"],
+      "containers/*": ["src/frameworks/containers/*"],
+      "components/*": ["src/frameworks/components/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "cypress"]
 }

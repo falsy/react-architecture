@@ -1,8 +1,8 @@
 {
   "name": "react-with-clean-architecture",
-  "version": "2.2.0",
+  "version": "2.3.0",
+  "private": true,
   "description": "A Sample Project for a React Project Based on Clean Architecture",
-  "main": "index.js",
   "scripts": {
     "start": "vite",
     "build": "vite build",

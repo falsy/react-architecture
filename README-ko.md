@@ -13,7 +13,7 @@
 
 ## Use Stack
 
-TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL, Cypress
+TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL, Cypress, Github Actions
 
 ## Directory Structure
 

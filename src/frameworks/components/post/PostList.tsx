@@ -11,7 +11,7 @@ export default function PostList({ response }: { response?: IPost[] }) {
         background: "#f5f5f5"
       })}
     >
-      <ul>
+      <ul id="post-list">
         {posts.map((post) => (
           <li
             key={post.id}

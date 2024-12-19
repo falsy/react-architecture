@@ -8,7 +8,8 @@
     "build": "vite build",
     "panda": "panda",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest",
+    "cypress": "cypress open"
   },
   "author": "falsy",
   "license": "The Unlicense",
@@ -32,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "cypress": "^13.17.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",

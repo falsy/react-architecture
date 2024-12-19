@@ -1,7 +1,7 @@
 import { GET_ALL_POSTS } from "constants/queries"
 import useDependencies from "hooks/useDependencies"
-import ErrorBoundary from "components/commons/ErrorBoundary"
 import MutationProvider from "providers/MutationProvider"
+import ErrorBoundary from "components/commons/ErrorBoundary"
 import Button from "components/commons/Button"
 import { css } from "styled-system/css"
 

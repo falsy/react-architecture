@@ -9,6 +9,7 @@ export default function Button({
 }) {
   return (
     <button
+      name={text}
       className={css({
         border: "0px",
         background: "#000",

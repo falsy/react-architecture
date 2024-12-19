@@ -16,6 +16,7 @@ export default function Input({
       <label>
         <p>{label}</p>
         <input
+          name={label}
           className={css({
             border: "1px solid #ddd",
             padding: "4px 10px",

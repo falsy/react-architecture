@@ -29,5 +29,5 @@
       "components/*": ["src/frameworks/components/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "cypress"]
 }

@@ -17,7 +17,7 @@ This project utilizes Vite's `mock-server` to implement a very simple functional
 
 ## Use Stack
 
-TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL
+TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL, Cypress
 
 ## Directory Structure
 
@@ -56,7 +56,8 @@ The directory structure of the project is designed to be simple and clear, follo
 
 When the number of components within a directory grows and becomes complex, they are further organized into domain-specific directories. Components that are shared across multiple domains are placed in a `commons` directory. In the sample project, components are organized within the `components` directory, which contains a `commons` directory and domain-specific directories such as `post`.
 
-> In the sample project, which is small and simple, the directory structure is divided into a first level with `pages`, `providers`, `containers`, and `components`, and a second level under these, with `commons` and domain-specific directories (e.g., `post`, `comment`, etc.). However, in larger, more general projects, components can be further subdivided within the second level into a third level, such as `sections`, `boxes`, `items`, for even more granular organization.  
+> In the sample project, which is small and simple, the directory structure is divided into a first level with `pages`, `providers`, `containers`, and `components`, and a second level under these, with `commons` and domain-specific directories (e.g., `post`, `comment`, etc.). However, in larger, more general projects, components can be further subdivided within the second level into a third level, such as `sections`, `boxes`, `items`, for even more granular organization.
+
 > This `frameworks` layer directory structure is just a simple example. The structure of the frameworks directory in a general project can be freely adjusted depending on the project’s requirements or the preferences of the development team.
 
 ## Dependency Injection
@@ -194,6 +195,20 @@ yarn panda
 
 ```
 yarn start
+```
+
+## Test
+
+### Unit Test
+
+```
+yarn test
+```
+
+### E2E Test
+
+```
+yarn cypress
 ```
 
 ## Thank You!

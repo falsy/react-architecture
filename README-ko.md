@@ -13,7 +13,7 @@
 
 ## Use Stack
 
-TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL
+TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL, Cypress
 
 ## Directory Structure
 
@@ -53,6 +53,7 @@ TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL
 디렉토리 내의 구성 요소 수가 늘어나고 복잡해지면 도메인별 디렉토리로 더 정리됩니다. 여러 도메인에서 공유되는 구성 요소는 `commons` 디렉토리에 배치됩니다. 샘플 프로젝트에서 구성 요소는 `commons` 디렉토리와 `post`와 같은 도메인별 디렉토리를 포함하는 `components` 디렉토리 내에 정리됩니다.
 
 > 작고 간단한 샘플 프로젝트에서 디렉토리 구조는 `pages`, `providers`, `containers`, `components`가 있는 첫 번째 레벨과 `commons` 및 도메인별 디렉토리(예: `post`, `comment` 등)가 있는 두 번째 레벨로 나뉩니다. 그러나 더 크고 일반적인 프로젝트에서는 컴포넌트를 두 번째 레벨 내에서 `sections`, `boxes`, `items`와 같은 세 번째 레벨로 세분화하여 더욱 세부적으로 구성할 수 있습니다.
+
 > 이 `frameworks` 레이어 디렉토리 구조는 단순한 예일 뿐입니다. 일반 프로젝트의 frameworks 디렉토리 구조는 프로젝트 요구 사항이나 개발 팀의 선호도에 따라 자유롭게 조정할 수 있습니다.
 
 ## Dependency Injection
@@ -190,6 +191,20 @@ yarn panda
 
 ```
 yarn start
+```
+
+## 테스트
+
+### 단위 테스트
+
+```
+yarn test
+```
+
+### E2E 테스트
+
+```
+yarn cypress
 ```
 
 ## Thank You!

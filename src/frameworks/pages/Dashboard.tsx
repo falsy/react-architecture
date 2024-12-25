@@ -4,7 +4,7 @@ import { css } from "styled-system/css"
 
 export default function Dashboard() {
   return (
-    <div>
+    <>
       <Header />
       <main
         className={css({
@@ -13,6 +13,6 @@ export default function Dashboard() {
       >
         <PostSection />
       </main>
-    </div>
+    </>
   )
 }

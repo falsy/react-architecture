@@ -5,12 +5,12 @@ import { Routes } from "./Routes"
 
 export default function App() {
   return (
-    <div>
+    <>
       <QueryClientProvider>
         <DependencyProvider>
           <Routes />
         </DependencyProvider>
       </QueryClientProvider>
-    </div>
+    </>
   )
 }

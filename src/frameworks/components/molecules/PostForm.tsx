@@ -23,7 +23,7 @@ const PostForm = () => {
   }
 
   return (
-    <div>
+    <div className="post-form">
       <h2 className="text-lg pb-2">Create Post</h2>
       <div className="p-4 border border-gray/40 rounded-md">
         <div className="flex gap-6 mb-4">
@@ -41,7 +41,7 @@ const PostForm = () => {
           />
         </div>
         <div className="flex gap-4 items-center">
-          <Button onClick={handleClickCreatePost} text="Create Post" />
+          <Button onClick={handleClickCreatePost} text="Create" />
           {isPending && <p className="text-sm">Loading...</p>}
         </div>
       </div>

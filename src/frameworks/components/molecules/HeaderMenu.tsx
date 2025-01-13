@@ -2,9 +2,9 @@ export default function HeaderMenu() {
   return (
     <nav>
       <ul className="flex gap-3 text-sm">
-        <li>menu1</li>
-        <li>menu2</li>
-        <li>menu3</li>
+        <li>Menu1</li>
+        <li>Menu2</li>
+        <li>Menu3</li>
       </ul>
     </nav>
   )

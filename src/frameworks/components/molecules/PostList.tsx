@@ -23,7 +23,7 @@ const PostList = ({ className }: { className?: string }) => {
   }
 
   return (
-    <div className={clsx(["relative", className])}>
+    <div className={clsx(["post-list relative", className])}>
       <h2 className="text-lg pb-2">Post List</h2>
       <ul className="space-y-2">
         {posts.map((post) => (

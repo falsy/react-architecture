@@ -3,12 +3,13 @@ import IUserInfoVO from "domains/vos/interfaces/IUserInfoVO"
 
 export default interface IPost {
   readonly id: string
-  readonly title: string
-  readonly content: string
+  title: string
+  content: string
   readonly author: IUserInfoVO
   readonly comments: IComment[]
   readonly createdAt: Date
   readonly updatedAt: Date
+  updatePost(title: string, content: string): void
 }
 
 export interface IPostParams {

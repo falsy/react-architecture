@@ -17,7 +17,7 @@ This project utilizes Vite's `mock-server` to implement a very simple functional
 
 ## Use Stack
 
-TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL, Cypress, Github Actions
+TypeScript, Vite, React, Jotai, Panda CSS, Axios, ESLint, Jest, RTL, Cypress, Github Actions
 
 ## Directory Structure
 

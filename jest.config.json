@@ -15,10 +15,6 @@
     "^adapters/(.*)$": "<rootDir>/src/adapters/$1",
     "^di/(.*)$": "<rootDir>/src/di/$1",
     "^hooks/(.*)$": "<rootDir>/src/frameworks/hooks/$1",
-    "^pages/(.*)$": "<rootDir>/src/frameworks/pages/$1",
-    "^providers/(.*)$": "<rootDir>/src/frameworks/providers/$1",
-    "^containers/(.*)$": "<rootDir>/src/frameworks/containers/$1",
-    "^components/(.*)$": "<rootDir>/src/frameworks/components/$1",
-    "^styled-system/(.*)$": "<rootDir>/styled-system/$1"
+    "^components/(.*)$": "<rootDir>/src/frameworks/components/$1"
   }
 }

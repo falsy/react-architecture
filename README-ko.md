@@ -13,7 +13,7 @@
 
 ## Use Stack
 
-TypeScript, Vite, React, TanStack Query, Panda CSS, Axios, ESLint, Jest, RTL, Cypress, Github Actions
+TypeScript, Vite, React, Jotai, Panda CSS, Axios, ESLint, Jest, RTL, Cypress, Github Actions
 
 ## Directory Structure
 
@@ -116,60 +116,6 @@ export default function useDependencies() {
     throw new Error("Dependencies not found in context")
   }
   return dependencies
-}
-```
-
-## Networks
-
-> 네트워크 통신에 대한 컴포넌트 구성은 클린 아키텍처 구성과는 크게 관련되어 있지 않습니다. 단지, 컴포넌트 중심의 프로젝트 구성에 대한 작은 아이디어입니다.
-
-`TanStack Query(React Query)`와 고차 컴포넌트(HOC: Higher-Order Component)를 활용하여 UI의 구성 요소들과 TanStack Query와의 의존성을 낮추고 컴포넌트에서는 단순한 구성으로 효과적으로 기능을 구현할 수 있도록 하였습니다.
-
-```ts
-...
-
-export default function PostSection() {
-  const { presenters } = useDependencies()
-
-  return (
-    <>
-      <section>
-        <Title text="Posts" />
-        <ErrorBoundary>
-          <QueryProvider
-            queryKey={GET_ALL_POSTS}
-            queryFn={() => presenters.post.getSummaryPosts()}
-            loadingComponent={<div>Loading...</div>}
-            errorComponent={<div>Error...</div>}
-          >
-            <PostList />
-          </QueryProvider>
-        </ErrorBoundary>
-      </section>
-      <Divide />
-      <CreatePostSection />
-    </>
-  )
-}
-```
-
-```ts
-...
-
-export default function PostList({ response }: { response?: IPost[] }) {
-  const posts = response || []
-
-  return (
-    <div>
-      <ul>
-        {posts.map((post) => (
-          <li>
-            <PostItem post={post} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
 }
 ```
 

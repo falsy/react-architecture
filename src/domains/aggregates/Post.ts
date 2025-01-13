@@ -4,8 +4,8 @@ import IPost, { IPostParams } from "./interfaces/IPost"
 
 export default class Post implements IPost {
   readonly id: string
-  readonly title: string
-  readonly content: string
+  title: string
+  content: string
   readonly author: IUserInfoVO
   readonly comments: IComment[]
   readonly createdAt: Date
@@ -19,5 +19,10 @@ export default class Post implements IPost {
     this.comments = params.comments
     this.createdAt = params.createdAt
     this.updatedAt = params.updatedAt
+  }
+
+  updatePost(title: string, content: string) {
+    this.title = title
+    this.content = content
   }
 }

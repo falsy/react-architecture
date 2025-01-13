@@ -1,27 +1,23 @@
-import { css } from "styled-system/css"
-
 export default function Input({
   label,
   value,
   onChange,
+  className = "",
   type = "text"
 }: {
   label: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  className?: string
   type?: string
 }) {
   return (
-    <div>
+    <div {...{ className }}>
       <label>
-        <p>{label}</p>
+        <p className="mb-2 text-sm">{label}</p>
         <input
           name={label}
-          className={css({
-            border: "1px solid #ddd",
-            padding: "4px 10px",
-            fontSize: "14px"
-          })}
+          className={"border border-gray/50 p-2 w-full"}
           type={type}
           value={value}
           onChange={onChange}

@@ -1,10 +1,13 @@
 # React with Clean Architecture
 
-This is a small idea project based on the principles of `Domain-Driven Design(DDD)` and `Clean Architecture` for a React architecture. To maintain the core principle of `framework independence` in Clean Architecture, the primary domain logic and business rules are written independently of any framework, with only the UI layer being designed to rely on React.
+This is a small idea project that applies the principles of `Domain-driven Design (DDD)` and `Clean Architecture` to a React architecture. To adhere to the core principle of Clean Architecture, `framework independence`, all major domain logic and business rules are designed to be independent of any specific framework, while only the UI layer relies on React.
 
-To avoid redundancy with a previous project, [clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript), the focus is on a commonly used React tech stack rather than an discussion of DDD or Clean Architecture.
+This project implements simple functionality for displaying, adding, and deleting posts using Vite's `mock-server`. It is designed to provide a quick way to understand the overall structure and operation of the project, and it can also be used as a boilerplate code for new projects.
 
-This project utilizes Vite's `mock-server` to implement a very simple functionality for displaying, adding, or deleting a list of posts. It serves as a lightweight way to review the overall project structure and functionality while also being designed as a boilerplate codebase for new projects.
+#### ⚠️ Discontinued (2025-01-13)
+
+> This project has been discontinued due to significant overlap with the "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" project.  
+> Future updates will only be provided through the "clean-architecture-with-typescript" repository.
 
 #### Note.
 
@@ -17,14 +20,13 @@ This project utilizes Vite's `mock-server` to implement a very simple functional
 
 ## Use Stack
 
-TypeScript, Vite, React, Jotai, Panda CSS, Axios, ESLint, Jest, RTL, Cypress, Github Actions
+TypeScript, Vite, React, Jotai, Tailwind CSS, Axios, ESLint, Jest, RTL, Cypress, GitHub Actions
 
 ## Directory Structure
 
 ```
 /src
 ├─ constants
-├─ di
 ├─ domains
 │  ├─ aggregates
 │  ├─ entities
@@ -35,160 +37,157 @@ TypeScript, Vite, React, Jotai, Panda CSS, Axios, ESLint, Jest, RTL, Cypress, Gi
 │  │  └─ interfaces
 │  └─ vos
 ├─ adapters
-│  ├─ presenters
 │  ├─ repositories
 │  ├─ infrastructures
 │  ├─ dtos
 │  └─ vms
+├─ di
 └─ frameworks
+   ├─ contexts
    ├─ hooks
-   ├─ pages
-   ├─ providers
-   ├─ containers
    └─ components
+      ├─ pages
+      ├─ templates
+      ├─ organisms
+      ├─ molecules
+      └─ atoms
 ```
 
-The directory structure of the project is designed to be simple and clear, following the layers of Clean Architecture. The structure is divided into three main parts: `domains`, `adapters`, and `frameworks`, representing higher levels of abstraction in that order. The `frameworks` layer is further categorized into `pages`, `providers`, `containers`, and `components`.
-
-- `providers`: Contains components focused on providing specific data, such as `Context`.
-- `containers`: Contains components that maintain and use internal state.
-- `components`: Includes components that focus on rendering views using props.
-
-When the number of components within a directory grows and becomes complex, they are further organized into domain-specific directories. Components that are shared across multiple domains are placed in a `commons` directory. In the sample project, components are organized within the `components` directory, which contains a `commons` directory and domain-specific directories such as `post`.
-
-> In the sample project, which is small and simple, the directory structure is divided into a first level with `pages`, `providers`, `containers`, and `components`, and a second level under these, with `commons` and domain-specific directories (e.g., `post`, `comment`, etc.). However, in larger, more general projects, components can be further subdivided within the second level into a third level, such as `sections`, `boxes`, `items`, for even more granular organization.
-
-> This `frameworks` layer directory structure is just a simple example. The structure of the frameworks directory in a general project can be freely adjusted depending on the project’s requirements or the preferences of the development team.
+The directory structure is designed to be simple and clear, following the layers of Clean Architecture.  
+The project is divided into three main layers: `domains`, `adapters`, and `frameworks`. The UI elements in the `frameworks` layer are further organized within the `components` directory based on the "[Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/)" methodology.
 
 ## Dependency Injection
 
-DI was constructed using React's `Context`, `Provider`, and `Hook`.
-
-### DI
+The `di` function, defined in the `di` directory, injects dependencies for each layer and returns a `useCases` object with all dependencies properly injected.
 
 ```ts
-...
+import { API_URL } from "constants/networks"
+import ClientHTTP from "adapters/infrastructures/ClientHTTP"
+import repositoriesFn from "./repositories"
+import useCasesFn from "./useCases"
 
 export default function di() {
   const clientHTTP = new ClientHTTP(API_URL)
   const repositories = repositoriesFn({ clientHTTP })
   const useCases = useCasesFn(repositories)
-  const presenters = presentersFn(useCases)
 
-  return presenters
+  return useCases
 }
 ```
 
-### Provider
+In the sample code, the fetch API for HTTP communication is encapsulated into a class (ClientHTTP) and directly injected into the repositories. However, if you need to connect to other external services besides the fetch API, you can define an infrastructures function (as shown in the example) and inject it into the repositories.
 
 ```ts
-import { createContext, ReactNode } from "react"
-import di from "di/index"
+import infrastructuresFn from "./infrastructures"
+import repositoriesFn from "./repositories"
+import useCasesFn from "./useCases"
 
-interface Dependencies {
-  presenters: ReturnType<typeof di>
+export default function di() {
+  const infrastructures = infrastructuresFn()
+  const repositories = repositoriesFn(infrastructures)
+  const useCases = useCasesFn(repositories)
+
+  return useCases
 }
+```
 
-export const DependencyContext = createContext<Dependencies | null>(null)
+In previous versions, the Presenters layer was also defined and injected with dependencies, resulting in a fully injected Presenters object. However, now the Presenters layer role is fulfilled by React Hooks, which use the useCases object injected via the di function.
 
-export default function DependencyProvider({
-  children
-}: {
-  children: ReactNode
-}) {
-  const dependencies = {
-    presenters: di()
+## Presenters
+
+The Presenters layer for each domain is implemented using React Hooks and the global state management library [Jotai](https://jotai.org/).
+
+```ts
+import { useCallback, useMemo, useTransition } from "react"
+import { atom, useAtom } from "jotai"
+import useCases from "di/index"
+import IPost from "domains/aggregates/interfaces/IPost"
+
+const PostsAtoms = atom<IPost[]>([])
+
+export default function usePosts() {
+  const di = useMemo(() => useCases(), [])
+
+  const [posts, setPosts] = useAtom<IPost[]>(PostsAtoms)
+  const [isPending, startTransition] = useTransition()
+
+  const getPosts = useCallback(async () => {
+    startTransition(async () => {
+      const resPosts = await di.post.getPosts()
+      setPosts(resPosts)
+    })
+  }, [di.post, setPosts])
+
+  ...
+
+  return {
+    isPending,
+    posts,
+    getPosts,
+
+    ...
   }
-
-  return (
-    <DependencyContext.Provider value={dependencies}>
-      {children}
-    </DependencyContext.Provider>
-  )
 }
 ```
 
-### Hook
+As shown in the sample code, usePosts is implemented as a Presenter for the Post domain. It uses the `Atom(PostsAtoms)` from Jotai for global state management and provides various methods for handling posts, using the useCases object injected by the di function.
 
 ```ts
-import { useContext } from "react"
-import { DependencyContext } from "providers/DependencyProvider"
+import { useCallback, useMemo, useOptimistic, useTransition } from "react"
+import { atom, useAtom } from "jotai"
+import useCases from "di/index"
+import IPost from "domains/aggregates/interfaces/IPost"
 
-export default function useDependencies() {
-  const dependencies = useContext(DependencyContext)
-  if (!dependencies) {
-    throw new Error("Dependencies not found in context")
+const PostsAtoms = atom<IPost[]>([])
+
+export default function usePosts() {
+  const di = useMemo(() => useCases(), [])
+
+  const [posts, setPosts] = useAtom<IPost[]>(PostsAtoms)
+  const [optimisticPosts, setOptimisticPosts] = useOptimistic(posts)
+  const [isPending, startTransition] = useTransition()
+
+  ...
+
+  const deletePost = useCallback(
+    async (postId: string) => {
+      startTransition(async () => {
+        setOptimisticPosts((prevPosts) => {
+          return prevPosts.filter((post) => post.id !== postId)
+        })
+
+        try {
+          const isSucess = await di.post.deletePost(postId)
+          if (isSucess) {
+            const resPosts = await di.post.getPosts()
+            setPosts(resPosts)
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      })
+    },
+    [di.post, setOptimisticPosts, setPosts]
+  )
+
+  return {
+    isPending,
+    posts: optimisticPosts,
+    getPosts,
+    deletePost,
+    ...
   }
-  return dependencies
 }
 ```
 
-## Networks
-
-> The component structure for network communication is not closely related to the Clean Architecture. It is merely a small idea for organizing a component-centric project.
-
-Using `TanStack Query` and Higher-Order Component(HOC), we have reduced dependence on UI components and TanStack Query and made it possible for components to effectively implement functions in a simple configuration.
-
-```ts
-...
-
-export default function PostSection() {
-  const { presenters } = useDependencies()
-
-  return (
-    <>
-      <section>
-        <Title text="Posts" />
-        <ErrorBoundary>
-          <QueryProvider
-            queryKey={GET_ALL_POSTS}
-            queryFn={() => presenters.post.getSummaryPosts()}
-            loadingComponent={<div>Loading...</div>}
-            errorComponent={<div>Error...</div>}
-          >
-            <PostList />
-          </QueryProvider>
-        </ErrorBoundary>
-      </section>
-      <Divide />
-      <CreatePostSection />
-    </>
-  )
-}
-```
-
-```ts
-...
-
-export default function PostList({ response }: { response?: IPost[] }) {
-  const posts = response || []
-
-  return (
-    <div>
-      <ul>
-        {posts.map((post) => (
-          <li>
-            <PostItem post={post} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-```
+Additionally, you can use useOptimistic, introduced in React 19, for optimistic updates as shown in the above example.
 
 ## Run Project
 
 ### Install
 
 ```
-yarn
-```
-
-### Install Panda CSS
-
-```
-yarn panda
+yarn install
 ```
 
 ### Run

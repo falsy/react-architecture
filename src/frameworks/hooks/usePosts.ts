@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useCallback, useMemo, useOptimistic, useTransition } from "react"
 import { atom, useAtom } from "jotai"
-import useCases from "di/index"
 import IPost from "domains/aggregates/interfaces/IPost"
+import useCases from "di/index"
 
 const PostsAtoms = atom<IPost[]>([])
 

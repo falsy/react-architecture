@@ -1,6 +1,6 @@
-import Logo from "components/atoms/Logo"
-import HeaderMenu from "components/molecules/HeaderMenu"
 import Header from "components/templates/Header"
+import HeaderMenu from "components/molecules/HeaderMenu"
+import Logo from "components/atoms/Logo"
 
 export default function BaseHeader() {
   return (

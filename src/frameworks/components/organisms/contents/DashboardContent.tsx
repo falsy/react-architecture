@@ -1,6 +1,6 @@
+import Content from "components/templates/Content"
 import PostForm from "components/molecules/PostForm"
 import PostList from "components/molecules/PostList"
-import Content from "components/templates/Content"
 
 export default function DashboardContent() {
   return (

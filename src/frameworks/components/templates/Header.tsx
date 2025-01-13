@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useLayoutEffect } from "react"
-import Layout from "../../contexts/Layout"
 import clsx from "clsx"
+import Layout from "../../contexts/Layout"
 
 const HeaderComponent = ({
   logo,

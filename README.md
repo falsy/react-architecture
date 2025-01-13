@@ -6,8 +6,7 @@ This project implements simple functionality for displaying, adding, and deletin
 
 #### ⚠️ Discontinued (2025-01-13)
 
-> This project has been discontinued due to significant overlap with the "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" project.  
-> Future updates will only be provided through the "clean-architecture-with-typescript" repository.
+> This project has been discontinued due to significant overlap with the "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" project. Future updates will only be provided through the "clean-architecture-with-typescript" repository.
 
 #### Note.
 

@@ -6,8 +6,7 @@
 
 #### ⚠️ 중단됨(2025-01-13)
 
-> 이 프로젝트는 "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" 프로젝트와 많은 부분 중복되어 개발이 중단되었습니다.  
-> 이후 관련 업데이트는 "clean-architecture-with-typescript"를 통해서만 이루어집니다.
+> 이 프로젝트는 "[clean-architecture-with-typescript](https://github.com/falsy/clean-architecture-with-typescript)" 프로젝트와 많은 부분 중복되어 개발이 중단되었습니다. 이후 관련 업데이트는 "clean-architecture-with-typescript"를 통해서만 이루어집니다.
 
 ## Languages
 

@@ -2,11 +2,12 @@ module.exports = {
   env: {
     es6: true,
     browser: true,
-    node: true
+    node: true,
+    jest: true
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 2022,
+    ecmaVersion: "latest",
     sourceType: "module",
     ecmaFeatures: {
       jsx: true
@@ -27,9 +28,7 @@ module.exports = {
   ],
   rules: {
     "@typescript-eslint/no-require-imports": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-no-undef": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react/react-in-jsx-scope": "off"
   },
   settings: {
     react: {

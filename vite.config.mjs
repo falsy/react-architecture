@@ -27,20 +27,29 @@ export default defineConfig({
       name: "mock-server",
       configureServer(server) {
         const user = { id: "1", name: "falsy" }
-        const posts = []
-        const comments = []
+        let posts = [
+          {
+            id: "1",
+            title: "Hello, world!",
+            content: "This is the first post.",
+            author: user,
+            createdAt: new Date(),
+            updatedAt: new Date()
+          }
+        ]
+        let comments = []
 
         server.middlewares.use((req, res, next) => {
           if (req.method === "GET" && req.url === "/api/users") {
             setTimeout(() => {
               res.setHeader("Content-Type", "application/json")
               res.end(JSON.stringify(user))
-            }, 1000)
+            }, 400)
           } else if (req.method === "GET" && req.url === "/api/posts") {
             setTimeout(() => {
               res.setHeader("Content-Type", "application/json")
               res.end(JSON.stringify(posts))
-            }, 1000)
+            }, 400)
           } else if (req.method === "POST" && req.url === "/api/posts") {
             let body = ""
             req.on("data", (chunk) => {
@@ -49,7 +58,7 @@ export default defineConfig({
             req.on("end", () => {
               const post = {
                 ...JSON.parse(body),
-                id: new Date().getTime(),
+                id: new Date().getTime().toString(),
                 author: user,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -58,20 +67,46 @@ export default defineConfig({
               setTimeout(() => {
                 res.setHeader("Content-Type", "application/json")
                 res.end(JSON.stringify(true))
-              }, 1000)
+              }, 400)
             })
           } else if (
             req.method === "DELETE" &&
             typeof req.url === "string" &&
             req.url.startsWith("/api/posts/")
           ) {
-            const postId = Number(req.url.split("/").pop())
+            const postId = req.url.split("/").pop()
             const index = posts.findIndex((post) => post.id === postId)
             if (index !== -1) posts.splice(index, 1)
             setTimeout(() => {
               res.setHeader("Content-Type", "application/json")
               res.end(JSON.stringify(true))
-            }, 1000)
+            }, 400)
+          } else if (
+            req.method === "PUT" &&
+            typeof req.url === "string" &&
+            req.url.startsWith("/api/posts/")
+          ) {
+            let body = ""
+            req.on("data", (chunk) => {
+              body += chunk.toString()
+            })
+            req.on("end", () => {
+              const postId = req.url.split("/").pop()
+              posts = posts.map((post) => {
+                if (post.id === postId) {
+                  post = {
+                    ...post,
+                    ...JSON.parse(body),
+                    updatedAt: new Date()
+                  }
+                }
+                return post
+              })
+              setTimeout(() => {
+                res.setHeader("Content-Type", "application/json")
+                res.end(JSON.stringify(true))
+              }, 400)
+            })
           } else if (
             req.method === "GET" &&
             typeof req.url === "string" &&
@@ -85,7 +120,7 @@ export default defineConfig({
             setTimeout(() => {
               res.setHeader("Content-Type", "application/json")
               res.end(JSON.stringify(postComments))
-            }, 1000)
+            }, 400)
           } else if (
             req.method === "POST" &&
             typeof req.url === "string" &&
@@ -110,7 +145,7 @@ export default defineConfig({
               setTimeout(() => {
                 res.setHeader("Content-Type", "application/json")
                 res.end(JSON.stringify(true))
-              }, 1000)
+              }, 400)
             })
           } else {
             next()

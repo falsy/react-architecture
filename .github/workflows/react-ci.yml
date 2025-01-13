@@ -25,8 +25,5 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Install PandaCSS
-        run: yarn panda
-
       - name: Run tests
         run: yarn test
